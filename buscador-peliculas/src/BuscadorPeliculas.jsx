@@ -1,9 +1,9 @@
 
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useGet } from './hooks/useGet';
 import './buscadorPeliculas.css';
+import { Pelicula } from './components/Pelicula';
 
-// Lo que podemos hacer ahora, es pasar la Lógica a otro Archivo
 //También podemos crear Componentes aparte para utilizarlos acá dentro
 export const BuscadorPeliculas = () => {
 
@@ -11,36 +11,17 @@ export const BuscadorPeliculas = () => {
   const API_KEY = '7ec5529a4e86df58ce11ef8ae803504b';
   const urlBase = `https://api.themoviedb.org/3/search/movie`;
 
-  const [inputPelicula, setInputPelicula] = useState('');
-
-  const [peliculas, setPeliculas] = useState([]);
-
-  const getPelicula = async () => {
-    try {
-      const response = await axios.get(`${urlBase}?query=${inputPelicula}&api_key=${API_KEY}`);
-      const arrayPeliculas = response.data.results;
-
-      setPeliculas(arrayPeliculas);
-    } catch(error) {
-      console.error('', error.message);
-    }
-  };
-
-  const manejarInput = ({ target }) => {
-    const { value } = target;
-    setInputPelicula(value);
-  };
+  const [peliculas, loading, setLoading, inputPelicula, getPelicula, manejarInput] = useGet(API_KEY, urlBase);
 
   const enviarForm = (evento) => {
     evento.preventDefault();
-
+    setLoading(true);
     getPelicula();
   };
   
   useEffect(() => {
     //Luego de que se ACTUALIZA el ESTADO 'peliculas' IMPRIMO el ARRAY DE PELICULAS que me devuelve la API
     console.log(peliculas);
-    // console.log(peliculas.results);
   }, [peliculas])
 
   return (
@@ -62,13 +43,16 @@ export const BuscadorPeliculas = () => {
       <div>
         <ul>
           {
-            peliculas && peliculas.map((pelicula) => (
-              <div key={pelicula.id}>
-                <img src={`https://image.tmdb.org/t/p/w500/${pelicula.poster_path}`} alt={`${pelicula.title}`} />
-                <h2>{pelicula.title}</h2>
-                <p>{pelicula.overview}</p>
-              </div>
-            ))
+            loading ? <p>Cargando ...</p>: (
+              peliculas && peliculas.map((pelicula) => (
+                <Pelicula 
+                  id={pelicula.id}
+                  poster_path={pelicula.poster_path}
+                  title={pelicula.title}
+                  overview={pelicula.overview}
+                />
+              ))
+            )
           }
         </ul>
       </div>
