@@ -7,7 +7,7 @@ import { ProductosContext } from "../../context/ProductosContext";
 import { CarritoContext } from "../../context/CarritoContext";
 
 export const Productos = () => {
-  // const [productos] = useGet('https://fakestoreapi.com/products');
+  // const { productos, loading } = useGet('https://fakestoreapi.com/products');
   const { productos, loading } = useContext(ProductosContext);
 
   const {
@@ -16,15 +16,15 @@ export const Productos = () => {
     eliminarCompra,
   } = useContext(CarritoContext);
 
-  //Creo que NO es necesario CREAR a handledAgregar, de frente usemos a agregarCompra
-  const handledAgregar = (compra) => {
-    agregarCompra(compra);
-  };
+  // //Creo que NO es necesario CREAR a handledAgregar, de frente usemos a agregarCompra
+  // const handledAgregar = (compra) => {
+  //   agregarCompra(compra);
+  // };
 
-  //Creo que NO es necesario CREAR a handledEliminar, de frente usemos a eliminarCompra
-  const handledEliminar = (id) => {
-    eliminarCompra(id);
-  };
+  // //Creo que NO es necesario CREAR a handledEliminar, de frente usemos a eliminarCompra
+  // const handledEliminar = (id) => {
+  //   eliminarCompra(id);
+  // };
 
   return (
     <>

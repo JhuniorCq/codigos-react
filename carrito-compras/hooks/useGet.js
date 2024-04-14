@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 export const useGet = (url) => {
@@ -19,6 +19,10 @@ export const useGet = (url) => {
       console.error("", error.message);
     }
   };
+
+  // const getProductosCallback = useCallback(() => {
+  //   getProductos();
+  // }, [url]);
 
   useEffect(() => {
     getProductos();

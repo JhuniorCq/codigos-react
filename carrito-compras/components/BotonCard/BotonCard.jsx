@@ -1,7 +1,7 @@
 
 import './BotonCard.css';
 
-export const Boton = ({ nombre, clase, cambiarEstado }) => {
+export const BotonCard = ({ nombre, clase, cambiarEstado }) => {
     
     return (
         <button

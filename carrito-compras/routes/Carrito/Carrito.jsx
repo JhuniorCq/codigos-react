@@ -11,10 +11,6 @@ export const Carrito = () => {
     eliminarCompra,
   } = useContext(CarritoContext);
 
-  const handledPrint = () => {
-    print();
-  };
-
   const calcularTotal = () => {
     return listaCompras.reduce((total, item) => (total + item.price*item.cantidad), 0).toFixed(2);
   };
@@ -22,7 +18,7 @@ export const Carrito = () => {
   return (
     <>
       <h1>Carrito de Compras</h1>
-      <table class="table">
+      <table className="table">
         <thead>
           <tr>
             <th scope="col">Nombre</th>
@@ -65,7 +61,7 @@ export const Carrito = () => {
       <div>
         <button 
           className="btn btn-primary" 
-          onClick={handledPrint} 
+          onClick={() => print()} 
           disabled={listaCompras.length < 1}
         >
           COMPRAR
