@@ -58,7 +58,7 @@ export const Carrito = () => {
               <td><strong>TOTAL</strong></td>
               <td></td>
               <td></td>
-              <td>${calcularTotal()}</td> 
+              <td>${calcularTotal()}</td>
             </tr>
         </tbody>
       </table>
