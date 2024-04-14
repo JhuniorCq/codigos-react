@@ -19,7 +19,7 @@ function App() {
           <NavBar />
           <div className='contenedor'>
             <Routes>
-              <Route path='https://carrito-comprasss.netlify.app/' element={<Inicio />} />
+              <Route path='/' element={<Inicio />} />
               <Route path='/principal' element={<Principal />} />
               <Route path='/productos' element={<Productos />} />
               <Route path='/carrito' element={<Carrito />} />
