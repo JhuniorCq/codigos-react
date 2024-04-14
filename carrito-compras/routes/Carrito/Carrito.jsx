@@ -15,6 +15,10 @@ export const Carrito = () => {
     print();
   };
 
+  const calcularTotal = () => {
+    return listaCompras.reduce((total, item) => (total + item.price*item.cantidad), 0).toFixed(2);
+  };
+
   return (
     <>
       <h1>Carrito de Compras</h1>
@@ -34,7 +38,11 @@ export const Carrito = () => {
                 <tr key={item.id}>
                   <td>{item.title}</td>
                   <td>{item.price}</td>
-                  <td>{1}</td>
+                  <td>
+                    <button className="btn btn-outline-primary" onClick={() => disminuirCantidad(item.id)}>-</button>
+                    <button className="btn btn-primary">{item.cantidad}</button>
+                    <button className="btn btn-outline-primary" onClick={() => aumentarCantidad(item.id)}>+</button>
+                  </td>
                   <td>
                     <button
                       className="btn btn-danger"
@@ -46,6 +54,12 @@ export const Carrito = () => {
                 </tr>
               ))
             }
+            <tr>
+              <td><strong>TOTAL</strong></td>
+              <td></td>
+              <td></td>
+              <td>${calcularTotal()}</td> 
+            </tr>
         </tbody>
       </table>
       <div>

@@ -6,10 +6,8 @@ export const ProductoCard = ({
   id,
   image,
   title,
-  handledAgregar,
-  handledAumentar,
-  handledDisminuir,
-  handledEliminar
+  agregarCompra,
+  eliminarCompra
 }) => {
   //Este será el ESTADO para saber si un producto está agregado en el Carrito
   const [agregado, setAgregado] = useState(false);
@@ -18,7 +16,7 @@ export const ProductoCard = ({
   const cambiarEstado = () => {
     setAgregado(!agregado);
 
-    agregado ? handledEliminar(): handledAgregar();
+    agregado ? eliminarCompra(): agregarCompra();
   };
 
   return (

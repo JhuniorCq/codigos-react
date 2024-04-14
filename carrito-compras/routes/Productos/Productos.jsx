@@ -13,8 +13,6 @@ export const Productos = () => {
   const {
     listaCompras,
     agregarCompra,
-    aumentarCantidad,
-    disminuirCantidad,
     eliminarCompra,
   } = useContext(CarritoContext);
 
@@ -22,10 +20,6 @@ export const Productos = () => {
   const handledAgregar = (compra) => {
     agregarCompra(compra);
   };
-
-  const handledAumentar = () => {};
-
-  const handledDisminuir = () => {};
 
   //Creo que NO es necesario CREAR a handledEliminar, de frente usemos a eliminarCompra
   const handledEliminar = (id) => {
@@ -44,8 +38,8 @@ export const Productos = () => {
                 key={producto.id}
                 image={producto.image}
                 title={producto.title}
-                handledAgregar={() => agregarCompra(producto)}
-                handledEliminar={() => eliminarCompra(producto.id)}
+                agregarCompra={() => agregarCompra(producto)}
+                eliminarCompra={() => eliminarCompra(producto.id)}
               />
             ))
           )

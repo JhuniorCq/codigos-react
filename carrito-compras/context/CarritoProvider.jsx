@@ -8,10 +8,20 @@ const comprasReducer = (state, action) => {
   switch (action.type) {
     case "[CARRITO] Agregar Compra":
       return [...state, action.payload];
-    case "[CARRITO] Aumentar Cantidad Compra": //TODO: Agregar cantidad y modificar
-      break;
-    case "[CARRITO] Disminuir Cantidad Compra": //TODO: Agregar cantidad y modificar
-      break;
+    case "[CARRITO] Aumentar Cantidad Compra":
+      // Cuando se quiera AUMENTAR la Cantidad de un Producto Seleccionado, vamos a Modificar el Valor de la Propiedad "cantidad" del Producto Seleccionado
+      return state.map(item => {
+        const cantidad = item.cantidad + 1;
+        // En el IF retornamos a un Objeto con las mismas Propiedades del Objeto presente en la respectiva Iteración, y agregamos la Propiedad "cantidad" que tiene como valor a la Variable "cantidad" -> Como esta ya EXISTE se SOBREESCRIBIRÁ su Nuevo Valor sobre el que ya hay
+        if (item.id === action.payload) return {...item, cantidad};
+        return item;
+      });
+    case "[CARRITO] Disminuir Cantidad Compra":
+      return state.map(item => {
+        const cantidad = item.cantidad - 1;
+        if (item.id === action.payload && item.cantidad > 1) return {...item, cantidad};
+        return item;
+      });
     case "[CARRITO] Eliminar Compra":
       return state.filter((compra) => compra.id !== action.payload);
     default:
@@ -24,6 +34,9 @@ export const CarritoProvider = ({ children }) => {
   const [listaCompras, dispatch] = useReducer(comprasReducer, estadoInicial);
 
   const agregarCompra = (compra) => {
+    // Cuando se presione el Botón "Agregar al Carrito" de un Producto, se Agregará la Propiedad "cantidad" al Objeto que representa al Objeto seleccionado
+    compra.cantidad = 1;
+
     const action = {
       type: "[CARRITO] Agregar Compra",
       payload: compra,
