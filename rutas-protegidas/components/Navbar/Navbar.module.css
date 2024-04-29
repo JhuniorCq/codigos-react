@@ -1,0 +1,15 @@
+
+.active {
+    background-color: red;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.list {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
